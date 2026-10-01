@@ -1,0 +1,1 @@
+java -cp bin src.thread_cards.Card
