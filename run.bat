@@ -1,1 +1,1 @@
-java -cp bin src.thread_cards.Card
+java -cp bin src.thread_cards.CardGame
