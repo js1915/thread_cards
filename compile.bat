@@ -1,1 +1,1 @@
-javac -d bin src/*.java
+javac -d bin src/thread_cards/*.java

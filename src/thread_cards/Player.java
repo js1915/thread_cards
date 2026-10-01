@@ -1,12 +1,16 @@
+package src.thread_cards;
 public class Player {
     
     private static int playerCount;
     private int playerNumber;
     private Card[] hand = new Card[4];
-    private String playerName;
 
-    Player () {
+    public Player () {
         this.playerNumber = ++playerCount;
+    }
+
+    public static int getPlayerCount() {
+        return playerCount;
     }
 
     public int getPlayerNumber() {
