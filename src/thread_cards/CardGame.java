@@ -6,9 +6,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CardGame {
+
     public static void main(String[] args) {
         int playerCount;
         ArrayList<Card> pack;
+        
+        ArrayList<Player> players = new ArrayList<>();
+        ArrayList<Deck> decks = new ArrayList<>();
 
         // Read user input
         Scanner scn = new Scanner(System.in);
@@ -28,11 +32,49 @@ public class CardGame {
             System.out.println(pack.get(i).getCardValue());
         }
 
-        // TODO: Get pack file path (validate)
-        //          8n rows, no negatives
-        // TODO: Generate Cards and ...
-        // TODO: Add to an array of cards
-        // TODO: Deal player hands (4 each)
+
+        for (int i=0; i < playerCount; i++) {
+            // Create Players and decks
+            players.add(new Player());
+            decks.add(new Deck());
+        }
+
+        for (int i=0; i<playerCount; i++) {
+            for (Player p : players) {
+                Card cardToGive = pack.remove(0);
+                p.receiveCard(cardToGive);
+            }
+        }
+
+        //Debug print
+        for (Player p : players) {
+            System.out.println(p.getPlayerName());
+            for (Card c : p.hand) {
+                System.out.println("    " + c.getCardValue());
+            }
+        }
+        
+        
+        for (int i=0; i<playerCount; i++) {
+            for (Deck d : decks) {
+                Card cardToGive = pack.remove(0);
+                d.addCard(cardToGive);
+            }
+        }
+        int i = 0;
+        for (Deck d : decks) {
+
+            System.out.println("Deck " + ++i);
+            for (Card c : d.deck) {
+                System.out.println("    " + c.getCardValue());
+            }
+        }
+        for (Card c : pack) {
+            System.out.println(c.getCardValue());
+        }
+
+
+
         // TODO: Deal decks (n each)
         // TODO: Start Player Threads
     }
@@ -84,9 +126,5 @@ public class CardGame {
         }
 
         return pack;
-        }
-    
-    
-    
-    
+    }
 }

@@ -1,12 +1,16 @@
 package src.thread_cards;
+
+import java.util.ArrayList;
+
 public class Player {
     
     private static int playerCount;
     private int playerNumber;
-    private Card[] hand = new Card[4];
+    public ArrayList<Card> hand;
 
     public Player () {
         this.playerNumber = ++playerCount;
+        this.hand = new ArrayList<>();
     }
 
     public static int getPlayerCount() {
@@ -20,5 +24,17 @@ public class Player {
     public String getPlayerName() {
         return "player" + this.playerNumber;
     }
+
+    public synchronized void receiveCard(Card c) {
+        // TODO: Invariants - Make sure there is space in hand
+        hand.add(c);
+    }
+    
+    public synchronized Card disCard() {
+        // TODO: Algorithm to choose card
+        return hand.remove(0);
+    }
+
+     
 
 }
