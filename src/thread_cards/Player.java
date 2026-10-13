@@ -1,6 +1,7 @@
 package src.thread_cards;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Player implements Runnable{
     
@@ -76,6 +77,25 @@ public class Player implements Runnable{
             }
         }
         return winningHand;
+    }
+
+    // TODO: TEST THIS!!!
+    private int getIndexToDiscard() {
+        int discardIndex = -1;
+        ArrayList<Integer> discardable = new ArrayList<>();
+
+        Random randomNumberGen = new Random();
+
+        for (int i=0;i<4;i++) {
+            if (this.hand.get(i).getCardValue() != this.playerNumber) {
+            discardable.add(i);
+            }
+        }  
+
+        // Get a random discardable index from list of non-preferred card indexes.
+        // Return the index of the card (in hand) to be discarded 
+        discardIndex = discardable.get(randomNumberGen.nextInt(discardable.size())); 
+        return discardIndex;
     }
 
 }
