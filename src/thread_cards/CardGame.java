@@ -13,6 +13,7 @@ public class CardGame {
         
         ArrayList<Player> players = new ArrayList<>();
         ArrayList<Deck> decks = new ArrayList<>();
+        ArrayList<Thread> playerThreads = new ArrayList<>();
 
         // Read user input
         Scanner scn = new Scanner(System.in);
@@ -26,57 +27,42 @@ public class CardGame {
         pack = getPack(scn.nextLine(), playerCount);
 
         scn.close();
-
-        //Debug print
-        for (int i=0; i<pack.size(); i++) {
-            System.out.println(pack.get(i).getCardValue());
-        }
-
-
+        
+        // Create Decks
         for (int i=0; i < playerCount; i++) {
-            // Create Players and decks
-            players.add(new Player());
-            decks.add(new Deck());
+            decks.add(new Deck());            
         }
 
+        // Create players with deck references
+        for (int i=0; i < playerCount; i++) {
+            Deck drawDeck = decks.get(i);
+            Deck discardDeck = decks.get((i+1) % (playerCount)); // Allows ring topology wrapping
+            players.add(new Player(drawDeck, discardDeck));            
+        }
+
+        // Deal cards to players
         for (int i=0; i<playerCount; i++) {
             for (Player p : players) {
                 Card cardToGive = pack.remove(0);
                 p.receiveCard(cardToGive);
             }
         }
-
-        //Debug print
-        for (Player p : players) {
-            System.out.println(p.getPlayerName());
-            for (Card c : p.hand) {
-                System.out.println("    " + c.getCardValue());
-            }
-        }
         
-        
+        // Deal cards to decks
         for (int i=0; i<playerCount; i++) {
             for (Deck d : decks) {
                 Card cardToGive = pack.remove(0);
                 d.addCard(cardToGive);
             }
         }
-        int i = 0;
-        for (Deck d : decks) {
 
-            System.out.println("Deck " + ++i);
-            for (Card c : d.deck) {
-                System.out.println("    " + c.getCardValue());
-            }
+        // Start Player Threads
+        for (Player p: players) {
+            Thread thrd = new Thread(p);
+            playerThreads.add(thrd);
+
+            thrd.start();
         }
-        for (Card c : pack) {
-            System.out.println(c.getCardValue());
-        }
-
-
-
-        // TODO: Deal decks (n each)
-        // TODO: Start Player Threads
     }
 
 
