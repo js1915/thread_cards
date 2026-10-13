@@ -31,12 +31,12 @@ public class Player implements Runnable{
         return "player" + this.playerNumber;
     }
 
-    public synchronized void receiveCard(Card c) {
+    public void receiveCard(Card c) {
         // TODO: Invariants - Make sure there is space in hand
         hand.add(c);
     }
     
-    public synchronized Card disCard() {
+    public Card disCard() {
         // TODO: Algorithm to choose card
         return hand.remove(0);
     }
@@ -44,17 +44,38 @@ public class Player implements Runnable{
     @Override 
     public void run() {
         try {
-            this.turn();
+            this.turns();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         
     }
 
-    public void turn() throws InterruptedException {
-        System.out.println("This is " + this.getPlayerName());
-        System.out.println("    Draw deck: " + this.drawDeck.getDeckName());
-        System.out.println("    Discard deck: " + this.discardDeck.getDeckName());
+    public void turns() throws InterruptedException {
+        while (!Thread.currentThread().isInterrupted()) {
+            System.out.println("Running while loop for: " + this.getPlayerNumber());
+            if (this.isWinningHand()) {
+                // TODO: Notify all other threads
+                // Initialise shutdown for all threads (logging file dumps)
+                Thread.currentThread().interrupt();
+            }
+            // TODO: Choose a card to discard (non-preferred value must GO!)
+
+            // TODO: Draw from deck
+            // TODO: Discard to deck
+        }
+        System.out.println("WE WIN!!!!! THREAD " + this.getPlayerName());
+    }
+
+    private boolean isWinningHand() {
+        boolean winningHand = true;
+        int v = this.hand.get(0).getCardValue();
+        for (Card c: this.hand) {
+            if (c.getCardValue() != v) {
+                winningHand = false;
+            }
+        }
+        return winningHand;
     }
 
 }
