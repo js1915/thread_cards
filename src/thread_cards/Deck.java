@@ -31,6 +31,10 @@ public class Deck {
         return "Deck" + this.deckNumber;
     }
 
+    public boolean isReady() {
+        return !deck.isEmpty();
+    }
+
     // public Card swapCard(Card c) {
     //     synchronized (deck){
     //         deck.add(c);

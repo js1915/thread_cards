@@ -55,13 +55,16 @@ public class CardGame {
                 d.addCard(cardToGive);
             }
         }
-
         // Start Player Threads
         for (Player p: players) {
             Thread thrd = new Thread(p);
             playerThreads.add(thrd);
 
-            thrd.start();
+
+
+        }
+        for (Thread t: playerThreads) {
+            t.start();
         }
     }
 

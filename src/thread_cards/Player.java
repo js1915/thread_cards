@@ -1,7 +1,13 @@
 package src.thread_cards;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
+
 
 public class Player implements Runnable{
     
@@ -9,8 +15,11 @@ public class Player implements Runnable{
     private int playerNumber;
     public ArrayList<Card> hand;
 
-    public Deck drawDeck;
-    public Deck discardDeck;
+    private Deck drawDeck;
+    private Deck discardDeck;
+    
+    // TODO: Make an integer flag that has the winning player's number so that all threads KNOW
+    private static volatile boolean playerWon = false;
 
     public Player (Deck drawDeck, Deck discardDeck) {
         this.playerNumber = ++playerCount;
@@ -33,39 +42,78 @@ public class Player implements Runnable{
     }
 
     public void receiveCard(Card c) {
-        // TODO: Invariants - Make sure there is space in hand
         hand.add(c);
     }
+
+    public void drawCard() throws InterruptedException {
+        // TODO: Invariants - Make sure there is space in hand
+        System.out.println(this.getPlayerName() + " drew a card");
+        System.out.println("-------Start Of Deck" + drawDeck.getDeckNumber());
+        // for (Card c: drawDeck.deck) {
+        //     System.out.println(c.getCardValue());
+        // }
+        System.out.println("-------End of Deck");
+        
+        Card cardReceived = drawDeck.removeCard();
+        this.receiveCard(cardReceived);       
+    }
     
-    public Card disCard() {
+    public void disCard(int id) {
         // TODO: Algorithm to choose card
-        return hand.remove(0);
+        Card cardToDiscard = hand.remove(id);
+        System.out.println(this.getPlayerName() + " discarded a card");
+        System.out.println("Discarding card " + cardToDiscard.getCardValue());
+        System.out.println("-------Start Of Deck" + discardDeck.getDeckNumber());
+        // for (Card c: discardDeck.deck) {
+        //     System.out.println(c.getCardValue());
+        // }
+        System.out.println("-------End of Deck");
+        discardDeck.addCard(cardToDiscard);
+        System.out.println("-------Start Of Deck" + discardDeck.getDeckNumber());
+        // for (Card c: discardDeck.deck) {
+        //     System.out.println(c.getCardValue());
+        // }
+        System.out.println("-------End of Deck");
     }
 
-    @Override 
+    @Override
     public void run() {
         try {
             this.turns();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            synchronized (System.out) {
+                e.printStackTrace();
+            }
+
+            System.out.println("Exiting " + getPlayerName());
+            playerWon = true;
+            System.exit(0);
+
         }
         
     }
 
     public void turns() throws InterruptedException {
-        while (!Thread.currentThread().isInterrupted()) {
+        while (!playerWon) {
             System.out.println("Running while loop for: " + this.getPlayerNumber());
+            synchronized (System.out) {
+                System.out.println(getPlayerName() + "'s hand");
+                for (Card c: this.hand) {
+                    System.out.println(c.getCardValue());
+            }
+            }   
             if (this.isWinningHand()) {
                 // TODO: Notify all other threads
+                playerWon = true;
+                System.out.println("WE WIN!!!!! THREAD " + this.getPlayerName());
                 // Initialise shutdown for all threads (logging file dumps)
-                Thread.currentThread().interrupt();
+                // Thread.currentThread().interrupt();
+            } else if (drawDeck.isReady()) {
+                    int indexToDiscard = getIndexToDiscard();
+                    disCard(indexToDiscard);
+                    drawCard();
+                }
             }
-            // TODO: Choose a card to discard (non-preferred value must GO!)
-
-            // TODO: Draw from deck
-            // TODO: Discard to deck
-        }
-        System.out.println("WE WIN!!!!! THREAD " + this.getPlayerName());
     }
 
     private boolean isWinningHand() {
