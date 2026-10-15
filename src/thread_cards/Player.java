@@ -45,7 +45,7 @@ public class Player implements Runnable{
         hand.add(c);
     }
 
-    public void drawCard() throws InterruptedException {
+    public void drawCard() {
         // TODO: Invariants - Make sure there is space in hand
         System.out.println(this.getPlayerName() + " drew a card");
         System.out.println("-------Start Of Deck" + drawDeck.getDeckNumber());
@@ -78,22 +78,10 @@ public class Player implements Runnable{
 
     @Override
     public void run() {
-        try {
-            this.turns();
-        } catch (Exception e) {
-            synchronized (System.out) {
-                e.printStackTrace();
-            }
-
-            System.out.println("Exiting " + getPlayerName());
-            playerWon = true;
-            System.exit(0);
-
-        }
-        
+        this.turns();
     }
 
-    public void turns() throws InterruptedException {
+    public void turns() {
         while (!playerWon) {
             System.out.println("Running while loop for: " + this.getPlayerNumber());
             synchronized (System.out) {

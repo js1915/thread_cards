@@ -66,6 +66,13 @@ public class CardGame {
         for (Thread t: playerThreads) {
             t.start();
         }
+        try {
+            for (Thread t: playerThreads) {
+                t.join();
+            }
+        } catch (InterruptedException e) { 
+            e.printStackTrace();
+        }
     }
 
 
