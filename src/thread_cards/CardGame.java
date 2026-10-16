@@ -30,7 +30,9 @@ public class CardGame {
         
         // Create Decks
         for (int i=0; i < playerCount; i++) {
-            decks.add(new Deck());            
+            String fPath = new File("").getAbsolutePath();
+            File f = new File(fPath.concat("/src/thread_cards/log_files/deck" + (i+1) + "_output.txt"));
+            decks.add(new Deck(f));            
         }
 
         // Create players with deck references
@@ -68,13 +70,18 @@ public class CardGame {
         for (Thread t: playerThreads) {
             t.start();
         }
-        
+
         try {
             for (Thread t: playerThreads) {
                 t.join();
             }
         } catch (InterruptedException e) { 
             e.printStackTrace();
+        }
+
+        // Game end logic
+        for (Deck d: decks) {
+            d.endGame();
         }
     }
 

@@ -18,7 +18,7 @@ public class Player implements Runnable{
     private File logFile;
 
     // TODO: Make an integer flag that has the winning player's number so that all threads KNOW
-    private static volatile boolean playerWon = false;
+    private static volatile int playerWon = -1;
 
     public Player (Deck drawDeck, Deck discardDeck, File logFile) {
         this.playerNumber = ++playerCount;
@@ -58,33 +58,18 @@ public class Player implements Runnable{
 
     public void drawCard() {
         // TODO: Invariants - Make sure there is space in hand
-        System.out.println(this.getPlayerName() + " drew a card");
-        System.out.println("-------Start Of Deck" + drawDeck.getDeckNumber());
-        // for (Card c: drawDeck.deck) {
-        //     System.out.println(c.getCardValue());
-        // }
-        System.out.println("-------End of Deck");
-        
-        Card cardReceived = drawDeck.removeCard();
-        this.receiveCard(cardReceived);       
+        Card cardReceived = this.drawDeck.removeCard();
+        this.receiveCard(cardReceived);
+        String m = this.getPlayerName() + " draws a " + cardReceived.getCardValue() + " from deck " + this.drawDeck.getDeckNumber();
+        this.logMessage(m);     
     }
     
     public void disCard(int id) {
         // TODO: Algorithm to choose card
         Card cardToDiscard = hand.remove(id);
-        System.out.println(this.getPlayerName() + " discarded a card");
-        System.out.println("Discarding card " + cardToDiscard.getCardValue());
-        System.out.println("-------Start Of Deck" + discardDeck.getDeckNumber());
-        // for (Card c: discardDeck.deck) {
-        //     System.out.println(c.getCardValue());
-        // }
-        System.out.println("-------End of Deck");
         discardDeck.addCard(cardToDiscard);
-        System.out.println("-------Start Of Deck" + discardDeck.getDeckNumber());
-        // for (Card c: discardDeck.deck) {
-        //     System.out.println(c.getCardValue());
-        // }
-        System.out.println("-------End of Deck");
+        String m = this.getPlayerName() + " discards a " + cardToDiscard.getCardValue() + " to deck " + this.discardDeck.getDeckNumber();
+        this.logMessage(m);
     }
 
     @Override
@@ -93,20 +78,21 @@ public class Player implements Runnable{
     }
 
     public void turns() {
+        // Log initial hand
         this.logMessage(this.getPlayerName() + " initial hand " + this.getHandAsString());
-        while (!playerWon) {
+
+        while (playerWon==-1) {
             if (this.isWinningHand()) {
                 // TODO: Notify all other threads
-                playerWon = true;
-                System.out.println("WE WIN!!!!! THREAD " + this.getPlayerName());
-                // Initialise shutdown for all threads (logging file dumps)
-                // Thread.currentThread().interrupt();
+                playerWon = this.getPlayerNumber();
             } else if (drawDeck.isReady()) {
                     int indexToDiscard = getIndexToDiscard();
                     disCard(indexToDiscard);
                     drawCard();
+                    this.logMessage(this.getPlayerName() + " current hand is " + this.getHandAsString());
                 }
             }
+        this.shutdownThread();
     }
 
     private boolean isWinningHand() {
@@ -120,7 +106,6 @@ public class Player implements Runnable{
         return winningHand;
     }
 
-    // TODO: TEST THIS!!!
     private int getIndexToDiscard() {
         int discardIndex = -1;
         ArrayList<Integer> discardable = new ArrayList<>();
@@ -141,20 +126,19 @@ public class Player implements Runnable{
 
     private void setupFile() {
         try {
-            if (!this.logFile.exists()) {
-                this.logFile.createNewFile();
+            if (this.logFile.exists()) {
+                this.logFile.delete(); 
             }
+            this.logFile.createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(0);
         }
-        
-        
     }
 
     private void logMessage(String m) {
         try {
-            FileWriter w = new FileWriter(this.logFile);
+            FileWriter w = new FileWriter(this.logFile, true);
             w.write(m + "\n");
             w.close();
         } catch (IOException e) {
@@ -163,7 +147,18 @@ public class Player implements Runnable{
             System.exit(0);
             return;
         }
-        System.out.println("Wrote '" + m + "' to file");
+    }
+
+    private void shutdownThread() {
+        String m = "";
+        if (playerWon == this.getPlayerNumber()) {
+            m += this.getPlayerName() + " wins";
+        } else {
+            m += "player" + playerWon + " has informed " + this.getPlayerName() + " that player" + playerWon + " has won";
+        }
+        this.logMessage(m);
+        this.logMessage(this.getPlayerName() + " exits");
+        this.logMessage(this.getPlayerName() + " final hand " + this.getHandAsString());
     }
 
 }

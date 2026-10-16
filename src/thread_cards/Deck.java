@@ -1,6 +1,8 @@
 package src.thread_cards;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Deck {
@@ -13,9 +15,11 @@ public class Deck {
 
     private File logFile;
 
-    public Deck() {
+    public Deck(File logFile) {
         this.deck = new ArrayList<>();
         this.deckNumber = ++deckCount;
+
+        this.logFile = logFile;
     }
 
     public synchronized void addCard(Card c) {
@@ -34,8 +38,35 @@ public class Deck {
         return "Deck" + this.deckNumber;
     }
 
+    public String getDeckAsString() {
+        String s = "";
+        for (Card c: this.deck) {
+            s += c.getCardValue() + " ";
+        }
+        s = s.substring(0, s.length()-1);
+        return s;
+    }
+
     public boolean isReady() {
         return !deck.isEmpty();
+    }
+
+    private void logMessage(String m) {
+        try {
+            FileWriter w = new FileWriter(this.logFile, true);
+            w.write(m + "\n");
+            w.close();
+        } catch (IOException e) {
+            System.out.println("File writing failed!");
+            e.printStackTrace();
+            System.exit(0);
+            return;
+        }
+    }
+
+    public void endGame() {
+        String m = this.getDeckName() + " contents: " + this.getDeckAsString();
+        this.logMessage(m);
     }
 
     // public Card swapCard(Card c) {
