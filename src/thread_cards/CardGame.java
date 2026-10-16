@@ -37,7 +37,11 @@ public class CardGame {
         for (int i=0; i < playerCount; i++) {
             Deck drawDeck = decks.get(i);
             Deck discardDeck = decks.get((i+1) % (playerCount)); // Allows ring topology wrapping
-            players.add(new Player(drawDeck, discardDeck));            
+
+            // Logging file setup
+            String fPath = new File("").getAbsolutePath();
+            File f = new File(fPath.concat("/src/thread_cards/log_files/player" + (i+1) + "_output.txt"));
+            players.add(new Player(drawDeck, discardDeck, f));            
         }
 
         // Deal cards to players
@@ -59,13 +63,12 @@ public class CardGame {
         for (Player p: players) {
             Thread thrd = new Thread(p);
             playerThreads.add(thrd);
-
-
-
         }
+
         for (Thread t: playerThreads) {
             t.start();
         }
+        
         try {
             for (Thread t: playerThreads) {
                 t.join();

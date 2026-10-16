@@ -1,5 +1,6 @@
 package src.thread_cards;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class Deck {
@@ -9,6 +10,8 @@ public class Deck {
 
     public ArrayList<Card> deck;
     private int deckNumber;
+
+    private File logFile;
 
     public Deck() {
         this.deck = new ArrayList<>();

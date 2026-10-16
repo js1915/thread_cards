@@ -1,13 +1,10 @@
 package src.thread_cards;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStreamReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;
-
 
 public class Player implements Runnable{
     
@@ -17,16 +14,21 @@ public class Player implements Runnable{
 
     private Deck drawDeck;
     private Deck discardDeck;
-    
+
+    private File logFile;
+
     // TODO: Make an integer flag that has the winning player's number so that all threads KNOW
     private static volatile boolean playerWon = false;
 
-    public Player (Deck drawDeck, Deck discardDeck) {
+    public Player (Deck drawDeck, Deck discardDeck, File logFile) {
         this.playerNumber = ++playerCount;
         this.hand = new ArrayList<>();
 
         this.drawDeck = drawDeck;
         this.discardDeck = discardDeck;
+
+        this.logFile = logFile;
+        this.setupFile();
     }
 
     public static int getPlayerCount() {
@@ -39,6 +41,15 @@ public class Player implements Runnable{
 
     public String getPlayerName() {
         return "player" + this.playerNumber;
+    }
+
+    public String getHandAsString() {
+        String s = "";
+        for (Card c: this.hand) {
+            s += c.getCardValue() + " ";
+        }
+        s = s.substring(0,s.length() - 1); // Remove trailing space
+        return s;
     }
 
     public void receiveCard(Card c) {
@@ -82,14 +93,8 @@ public class Player implements Runnable{
     }
 
     public void turns() {
+        this.logMessage(this.getPlayerName() + " initial hand " + this.getHandAsString());
         while (!playerWon) {
-            System.out.println("Running while loop for: " + this.getPlayerNumber());
-            synchronized (System.out) {
-                System.out.println(getPlayerName() + "'s hand");
-                for (Card c: this.hand) {
-                    System.out.println(c.getCardValue());
-            }
-            }   
             if (this.isWinningHand()) {
                 // TODO: Notify all other threads
                 playerWon = true;
@@ -132,6 +137,33 @@ public class Player implements Runnable{
         // Return the index of the card (in hand) to be discarded 
         discardIndex = discardable.get(randomNumberGen.nextInt(discardable.size())); 
         return discardIndex;
+    }
+
+    private void setupFile() {
+        try {
+            if (!this.logFile.exists()) {
+                this.logFile.createNewFile();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(0);
+        }
+        
+        
+    }
+
+    private void logMessage(String m) {
+        try {
+            FileWriter w = new FileWriter(this.logFile);
+            w.write(m + "\n");
+            w.close();
+        } catch (IOException e) {
+            System.out.println("File writing failed!");
+            e.printStackTrace();
+            System.exit(0);
+            return;
+        }
+        System.out.println("Wrote '" + m + "' to file");
     }
 
 }
