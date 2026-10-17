@@ -1,5 +1,3 @@
-package src.thread_cards;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -29,6 +27,13 @@ public class Player implements Runnable{
 
         this.logFile = logFile;
         this.setupFile();
+    }
+
+    public static void resetPlayers() {
+        playerCount = 0;
+    }
+    public static void resetPlayers(int count) {
+        playerCount = count;
     }
 
     public static int getPlayerCount() {

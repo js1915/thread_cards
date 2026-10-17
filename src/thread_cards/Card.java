@@ -1,4 +1,3 @@
-package src.thread_cards;
 public class Card {
 
     private int cardValue;
