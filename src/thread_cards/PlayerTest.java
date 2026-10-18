@@ -3,7 +3,6 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Set;
 
 import org.junit.After;
 import org.junit.Before;

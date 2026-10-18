@@ -3,15 +3,12 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Set;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-
-public class DeckTest {
-
+public class IntegrationTest {
     @Before 
     public void setUpClass() {
 
@@ -19,11 +16,11 @@ public class DeckTest {
 
     @After 
     public void tearDownClass() {
-        
+
     }
 
     @Test 
-    public void testTests() {
-        System.out.println("Deck tests working!");
+    public void testTest() {
+        System.out.println("IntegrationTest working");
     }
 }

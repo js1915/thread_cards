@@ -51,6 +51,11 @@ public class Deck {
         return s;
     }
 
+    public void resetDeck() {
+        this.deck = new ArrayList<>();
+        deckNumber = 0;
+    }
+
     public boolean isReady() {
         return !deck.isEmpty();
     }
