@@ -118,7 +118,7 @@ public class CardGame {
             fscn.close();
 
             if (pack.size() != (8*playerCount)) {
-                throw new IllegalArgumentException("Invalid pack size"); // TODO: Write custom exceptions
+                throw new IllegalArgumentException("Invalid pack size");
             }
 
         } catch (IllegalArgumentException e) {

@@ -8,7 +8,7 @@ public class Deck {
     
     private static int deckCount = 0;
 
-    public ArrayList<Card> deck;
+    private ArrayList<Card> deck;
     private int deckNumber;
 
     private File logFile;
@@ -36,12 +36,18 @@ public class Deck {
         return "Deck" + this.deckNumber;
     }
 
+    public ArrayList<Card> getDeck() {
+        return this.deck;
+    }
+
     public String getDeckAsString() {
         String s = "";
         for (Card c: this.deck) {
             s += c.getCardValue() + " ";
         }
-        s = s.substring(0, s.length()-1);
+        if (s.length() > 0) {
+            s = s.substring(0, s.length()-1);
+        }
         return s;
     }
 

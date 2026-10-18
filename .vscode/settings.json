@@ -9,5 +9,6 @@
 
     "editor.codeActionsOnSave": {
         "source.organizeImports": "never"
-    }   
+    },
+    "java.debug.settings.onBuildFailureProceed": true
 }

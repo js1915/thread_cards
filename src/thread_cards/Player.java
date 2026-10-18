@@ -8,14 +8,13 @@ public class Player implements Runnable{
     
     private static int playerCount;
     private int playerNumber;
-    public ArrayList<Card> hand;
+    private ArrayList<Card> hand;
 
     private Deck drawDeck;
     private Deck discardDeck;
 
     private File logFile;
 
-    // TODO: Make an integer flag that has the winning player's number so that all threads KNOW
     private static volatile int playerWon = -1;
 
     public Player (Deck drawDeck, Deck discardDeck, File logFile) {
@@ -48,33 +47,56 @@ public class Player implements Runnable{
         return "player" + this.playerNumber;
     }
 
+    public ArrayList<Card> getHand() {
+        return this.hand;
+    }
+
     public String getHandAsString() {
         String s = "";
         for (Card c: this.hand) {
             s += c.getCardValue() + " ";
         }
-        s = s.substring(0,s.length() - 1); // Remove trailing space
+        if (s.length() != 0) {
+            s = s.substring(0,s.length() - 1); // Remove trailing space
+        }
         return s;
     }
 
+    @Override
+    public String toString() {
+        return this.getHandAsString();
+    }
+
     public void receiveCard(Card c) {
-        hand.add(c);
+        if (this.hand.size() < 4){
+            hand.add(c);
+        } else {
+            throw new ArrayIndexOutOfBoundsException("Cannot have more than 4 cards in a hand.");
+        }
     }
 
     public void drawCard() {
-        // TODO: Invariants - Make sure there is space in hand
         Card cardReceived = this.drawDeck.removeCard();
         this.receiveCard(cardReceived);
         String m = this.getPlayerName() + " draws a " + cardReceived.getCardValue() + " from deck " + this.drawDeck.getDeckNumber();
         this.logMessage(m);     
     }
     
-    public void disCard(int id) {
-        // TODO: Algorithm to choose card
-        Card cardToDiscard = hand.remove(id);
+    public void disCard() {
+        int indexToDiscard = getIndexToDiscard();
+        Card cardToDiscard = hand.remove(indexToDiscard);
         discardDeck.addCard(cardToDiscard);
         String m = this.getPlayerName() + " discards a " + cardToDiscard.getCardValue() + " to deck " + this.discardDeck.getDeckNumber();
         this.logMessage(m);
+    }
+
+    public void removeCard(int id) {
+        hand.remove(id);
+    }
+
+    public synchronized void drawDiscard() {
+        this.disCard();
+        this.drawCard();
     }
 
     @Override
@@ -88,19 +110,16 @@ public class Player implements Runnable{
 
         while (playerWon==-1) {
             if (this.isWinningHand()) {
-                // TODO: Notify all other threads
                 playerWon = this.getPlayerNumber();
             } else if (drawDeck.isReady()) {
-                    int indexToDiscard = getIndexToDiscard();
-                    disCard(indexToDiscard);
-                    drawCard();
+                    this.drawDiscard();
                     this.logMessage(this.getPlayerName() + " current hand is " + this.getHandAsString());
                 }
             }
         this.shutdownThread();
     }
 
-    private boolean isWinningHand() {
+    public boolean isWinningHand() {
         boolean winningHand = true;
         int v = this.hand.get(0).getCardValue();
         for (Card c: this.hand) {
