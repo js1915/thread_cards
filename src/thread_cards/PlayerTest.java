@@ -10,12 +10,15 @@ import org.junit.Test;
 
 public class PlayerTest {
 
-    private static Player p;
-    private static Deck d1;
-    private static Deck d2;
     private static File f1;
     private static File f2;
     private static File f3;
+
+    private static Player p;
+    
+    private static Deck d1;
+    private static Deck d2;
+    
 
     @Before
     public void setUpClass() throws Exception {
@@ -25,7 +28,7 @@ public class PlayerTest {
         d1 = new Deck(f1);
         d2 = new Deck(f2);
 
-        File f3 = new File("playerOutput.txt");
+        f3 = new File("playerOutput.txt");
         p = new Player(d1, d2, f3);
     }
 
@@ -33,6 +36,9 @@ public class PlayerTest {
     public void tearDownClass() {
         Player.resetPlayers();
         Deck.resetDeck();
+        f1.delete();
+        f2.delete();
+        f3.delete();
     }
 
 

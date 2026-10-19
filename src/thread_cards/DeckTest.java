@@ -23,7 +23,8 @@ public class DeckTest {
     @After
     public void tearDownClass() {
         Deck.resetDeck();
-        d = new Deck(f);       
+        d = new Deck(f);
+        f.delete();       
     }
 
     @Test 

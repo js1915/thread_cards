@@ -63,9 +63,6 @@ public class IntegrationTest {
         System.out.println("    ✅ Passed 1/3: Deal methods conserve cards");
 
         p1.drawDiscard();
-        System.out.println(p1.getHandAsString());
-        System.out.println(d1.getDeckAsString());
-        System.out.println(d2.getDeckAsString());
         
         ArrayList<Card> firstPassList = new ArrayList<>(p1.getHand());
         firstPassList.addAll(d1.getDeck());
@@ -171,26 +168,6 @@ public class IntegrationTest {
         System.out.println("    ✅ Passed 1/1: Player 2 immediately exits and does not perform any more actions");
 
         System.out.println("    ✅ All tests passed");
-
-    }
-
-    @Test
-    public void testValidInputHandling() {
-
-    }
-
-    @Test
-    public void testInvalidInputHandling() {
-
-    }
-
-    @Test
-    public void testOutputFileGeneration() {
-
-    }
-
-    @Test
-    public void testOutputFileContents() {
 
     }
 }

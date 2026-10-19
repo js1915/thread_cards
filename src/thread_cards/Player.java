@@ -94,7 +94,7 @@ public class Player implements Runnable {
         hand.remove(id);
     }
 
-    public synchronized void drawDiscard() {
+    public void drawDiscard() {
         this.disCard();
         this.drawCard();
     }
