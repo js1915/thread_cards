@@ -1,24 +1,28 @@
 import static org.junit.Assert.*;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
-import jdk.jfr.Timestamp;
+import java.util.Scanner;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 public class IntegrationTest {
+    File f;
+    String fPath;
     @Before 
     public void setUpClass() {
-        
+        fPath = new File("").getAbsolutePath();
+        System.out.println(fPath);
+        f = new File(fPath.concat("/test_output.txt"));
     }
 
     @After 
     public void tearDownClass() {
-
+        
     }
 
     @Test
@@ -36,8 +40,6 @@ public class IntegrationTest {
                 cards.add(new Card(i));
             }
         }
-
-        File f = new File("_.txt");
 
         Deck d1 = new Deck(f);
         Deck d2 = new Deck(f);
@@ -169,5 +171,94 @@ public class IntegrationTest {
 
         System.out.println("    ✅ All tests passed");
 
+    }
+
+    @Test
+    public void testOutputFiles() throws FileNotFoundException {
+        File d1Output = new File(fPath.concat("/deck1_output.txt"));
+        File d2Output = new File(fPath.concat("/deck2_output.txt"));
+
+        File p1Output = new File(fPath.concat("/player1_output.txt"));
+        File p2Output = new File(fPath.concat("/player2_output.txt"));
+        System.out.println(fPath.concat("/player1_output.txt"));
+
+        ArrayList<Card> cards = new ArrayList<>();
+        
+        for (int i=0; i<16; i++) {
+            if (i < 3 || i == 8) {
+                cards.add(new Card(1));
+            } else {
+                cards.add(new Card(i + 1));
+            }
+            
+        }
+        Deck d1 = new Deck(d1Output);
+        Deck d2 = new Deck(d2Output);
+
+        Player p1 = new Player(d1, d2, p1Output);
+        Player p2 = new Player(d2, d1, p2Output);
+
+        for (int i=0; i<4; i++) {
+            p1.receiveCard(cards.get(i));
+            p2.receiveCard(cards.get(i+4));
+            d1.addCard(cards.get(i+8));
+            d2.addCard(cards.get(i+12));
+        }
+
+        p1.turns();
+        Scanner p1reader = new Scanner(p1Output);
+        String initialHandLine = p1reader.nextLine();
+        String discardLine = p1reader.nextLine();
+        String drawLine = p1reader.nextLine();
+        String currentHandLine = p1reader.nextLine();
+
+        String winLine = p1reader.nextLine();
+        String exitLine = p1reader.nextLine();
+        String finalHandLine = p1reader.nextLine();
+
+        assertEquals("player1 initial hand 1 1 1 4", initialHandLine);
+        System.out.println("    ✅ Passed 1/6: Starting the turns method writes the correct messsage to the output file");
+
+        assertEquals("player1 discards a 4 to deck 2", discardLine);
+        assertEquals("player1 draws a 1 from deck 1", drawLine);
+        System.out.println("    ✅ Passed 2/6: Drawing and discarding writes the correct messages to the output file");
+
+        assertEquals("player1 current hand is 1 1 1 1", currentHandLine);
+        System.out.println("    ✅ Passed 3/6: Current hand added to output after every turn");
+        
+        
+        
+        assertEquals("player1 wins", winLine);
+        assertEquals("player1 exits", exitLine);
+        assertEquals("player1 final hand 1 1 1 1", finalHandLine);
+        System.out.println("    ✅ Passed 4/6: Win detection causes player 1 to output it winning exiting and its final hand");
+
+        p2.turns();
+        Scanner p2reader = new Scanner(p2Output);
+        p2reader.nextLine();  // Skip initial hand which has already been tested
+        String lossLine = p2reader.nextLine();
+        String p2ExitLine = p2reader.nextLine();
+        String p2FinalHandLine = p2reader.nextLine();
+
+        assertEquals("player1 has informed player2 that player1 has won", lossLine);
+        assertEquals("player2 exits", p2ExitLine);
+        assertEquals("player2 final hand 5 6 7 8", p2FinalHandLine); // Hand unchanged
+        System.out.println("    ✅ Passed 5/6: Player 2 outputs that player1 has won and proceeds with other output messages as above");
+
+        d1.endGame();
+        Scanner deckReader = new Scanner(d1Output);
+        String deckOutput = deckReader.nextLine();
+        assertEquals("Deck1 contents: " + d1.getDeckAsString(), deckOutput);
+        System.out.println("    ✅ Passed 6/6: Deck outputs its contents when the game is ended");
+
+        p1reader.close();
+        p2reader.close();
+        deckReader.close();
+
+        // Cleanup files at end
+        p1Output.delete();
+        p2Output.delete();
+        d1Output.delete();
+        d2Output.delete();
     }
 }
