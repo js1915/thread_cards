@@ -18,6 +18,7 @@ public class Deck {
         this.deckNumber = ++deckCount;
 
         this.logFile = logFile;
+        this.setupFile();
     }
 
     public synchronized void addCard(Card c) {
@@ -53,6 +54,18 @@ public class Deck {
 
     public static void resetDeck() {
         deckNumber = 0;
+    }
+
+    private void setupFile() {
+        try {
+            if (this.logFile.exists()) {
+                this.logFile.delete(); 
+            }
+            this.logFile.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(0);
+        }
     }
 
     public boolean isReady() {

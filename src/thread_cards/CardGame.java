@@ -25,11 +25,22 @@ public class CardGame {
         pack = getPack(scn.nextLine(), playerCount);
 
         scn.close();
+
+        // Make requried supporting directories
+        try {
+            // Clean directories
+            String fPath = new File("").getAbsolutePath();
+            boolean _ = new File(fPath.concat("/log_files")).mkdirs();
+        } catch (Exception e) {
+            System.out.println("Unable to make required directories: check permissions");
+            System.exit(0);
+        }
+        
         
         // Create Decks
         for (int i=0; i < playerCount; i++) {
             String fPath = new File("").getAbsolutePath();
-            File f = new File(fPath.concat("/src/thread_cards/log_files/deck" + (i+1) + "_output.txt"));
+            File f = new File(fPath.concat("/log_files/deck" + (i+1) + "_output.txt"));
             decks.add(new Deck(f));            
         }
 
@@ -40,7 +51,7 @@ public class CardGame {
 
             // Logging file setup
             String fPath = new File("").getAbsolutePath();
-            File f = new File(fPath.concat("/src/thread_cards/log_files/player" + (i+1) + "_output.txt"));
+            File f = new File(fPath.concat("/log_files/player" + (i+1) + "_output.txt"));
             players.add(new Player(drawDeck, discardDeck, f));            
         }
 
@@ -104,10 +115,16 @@ public class CardGame {
     public static ArrayList<Card> getPack(String fpath, int playerCount) {
         File fileObj = new File(fpath);
         ArrayList<Card> pack = new ArrayList<>(); 
-        
+        int cardValue = 0;
+
         try (Scanner fscn = new Scanner(fileObj)) {
             while (fscn.hasNextLine()) {
-                int cardValue = Integer.parseInt(fscn.nextLine());
+                try {
+                    cardValue = Integer.parseInt(fscn.nextLine());
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid line in file");
+                }
+                
 
                 if (cardValue <= 0) {
                     throw new IllegalArgumentException("Invalid line in file");
@@ -123,10 +140,11 @@ public class CardGame {
 
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            e.printStackTrace();
+            System.exit(0);
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
-            e.printStackTrace();
+            System.out.println("Please check that the corect file path was supplied");
+            System.exit(0);
         }
 
         return pack;
