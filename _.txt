@@ -1,6 +1,6 @@
 player3 discards a 1 to deck 26
 player3 draws a 1 from deck 26
-player3 initial hand 2 3 1 1
+player3 initial hand 1 2 3 1
 player1 has informed player3 that player1 has won
 player3 exits
-player3 final hand 2 3 1 1
+player3 final hand 1 2 3 1
