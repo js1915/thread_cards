@@ -10,18 +10,20 @@ import org.junit.Test;
 
 
 public class DeckTest {
-
+    
+    private static File f;
     private static Deck d;
 
     @Before 
     public void setUpClass() {
-        File f = new File("_.txt");
+        f = new File("_.txt");
         d = new Deck(f);
     }
 
-    @After 
+    @After
     public void tearDownClass() {
-        d.resetDeck();       
+        Deck.resetDeck();
+        d = new Deck(f);       
     }
 
     @Test 

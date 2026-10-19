@@ -111,7 +111,6 @@ public class Player implements Runnable {
         while (playerWon==-1) {
             if (this.isWinningHand()) {
                 playerWon = this.getPlayerNumber();
-                System.out.println("Player " + this.getPlayerNumber() + " wins");
             } else if (drawDeck.isReady()) {
                     this.drawDiscard();
                     this.logMessage(this.getPlayerName() + " current hand is " + this.getHandAsString());
@@ -178,6 +177,7 @@ public class Player implements Runnable {
         String m = "";
         if (playerWon == this.getPlayerNumber()) {
             m += this.getPlayerName() + " wins";
+            System.out.println("Player " + this.getPlayerNumber() + " wins");
         } else {
             m += "player" + playerWon + " has informed " + this.getPlayerName() + " that player" + playerWon + " has won";
         }

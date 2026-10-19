@@ -15,10 +15,10 @@ public class PlayerTest {
     private static Deck d2;
     private static File f1;
     private static File f2;
+    private static File f3;
 
     @Before
     public void setUpClass() throws Exception {
-
         f1 = new File("deck1Output.txt");
         f2 = new File("deck2Output.txt");
 
@@ -31,7 +31,8 @@ public class PlayerTest {
 
     @After
     public void tearDownClass() {
-        Player.resetPlayers(0);
+        Player.resetPlayers();
+        Deck.resetDeck();
     }
 
 

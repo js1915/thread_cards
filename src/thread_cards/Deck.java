@@ -9,7 +9,7 @@ public class Deck {
     private static int deckCount = 0;
 
     private ArrayList<Card> deck;
-    private int deckNumber;
+    private static int deckNumber;
 
     private File logFile;
 
@@ -51,8 +51,7 @@ public class Deck {
         return s;
     }
 
-    public void resetDeck() {
-        this.deck = new ArrayList<>();
+    public static void resetDeck() {
         deckNumber = 0;
     }
 
@@ -77,10 +76,4 @@ public class Deck {
         String m = this.getDeckName() + " contents: " + this.getDeckAsString();
         this.logMessage(m);
     }
-
-    // public Card swapCard(Card c) {
-    //     synchronized (deck){
-    //         deck.add(c);
-    //     }
-    // }
 }
