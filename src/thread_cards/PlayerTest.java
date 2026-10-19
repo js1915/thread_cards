@@ -42,7 +42,7 @@ public class PlayerTest {
         assertEquals(1, Player.getPlayerCount());
         System.out.println("    ✅ Passed 1/2: Player count is 1");
 
-        Player newP = new Player(d1,d2, f1);
+        Player _ = new Player(d1,d2, f1);
         // Now there are two players
         assertEquals(2, Player.getPlayerCount());
         System.out.println("    ✅ Passed 2/2: Player count becomes 2 after a player is instantiated");
@@ -293,13 +293,13 @@ public class PlayerTest {
         actualDiscardDeck.sort(Comparator.comparing(Card::getCardValue));
 
         assertEquals("1 1 1 1", p.getHandAsString());
-        System.out.println("    ✅ Passed 1/___: Final hand is a winning hand");
+        System.out.println("    ✅ Passed 1/3: Final hand is a winning hand");
 
         assertEquals(expectedDrawDeck, d1.getDeck());
-        System.out.println("    ✅ Passed 2/___: Draw deck contains exactly the expected cards (correctly ordered)");
+        System.out.println("    ✅ Passed 2/3: Draw deck contains exactly the expected cards (correctly ordered)");
 
         assertEquals(expectedDiscardDeck, actualDiscardDeck);
-        System.out.println("    ✅ Passed 3/___: Discard deck contains exactly the expected cards");
+        System.out.println("    ✅ Passed 3/3: Discard deck contains exactly the expected cards");
 
 
     }

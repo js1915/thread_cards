@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Player implements Runnable{
+public class Player implements Runnable {
     
     private static int playerCount;
     private int playerNumber;
@@ -94,7 +94,7 @@ public class Player implements Runnable{
         hand.remove(id);
     }
 
-    public synchronized void drawDiscard() {
+    public void drawDiscard() {
         this.disCard();
         this.drawCard();
     }
