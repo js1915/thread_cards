@@ -1,12 +1,12 @@
 public class Card {
 
-    private int cardValue;
+    private final int cardValue;
 
     Card (int value) {
         this.cardValue = value;
     }
 
-    public int getCardValue() {
+    public  int getCardValue() {
         return cardValue;
     }
 

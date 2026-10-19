@@ -94,7 +94,7 @@ public class Player implements Runnable {
         hand.remove(id);
     }
 
-    public void drawDiscard() {
+    public synchronized void drawDiscard() {
         this.disCard();
         this.drawCard();
     }
@@ -111,6 +111,7 @@ public class Player implements Runnable {
         while (playerWon==-1) {
             if (this.isWinningHand()) {
                 playerWon = this.getPlayerNumber();
+                System.out.println("Player " + this.getPlayerNumber() + " wins");
             } else if (drawDeck.isReady()) {
                     this.drawDiscard();
                     this.logMessage(this.getPlayerName() + " current hand is " + this.getHandAsString());

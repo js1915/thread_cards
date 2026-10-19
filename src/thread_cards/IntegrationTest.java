@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import jdk.jfr.Timestamp;
 
 import org.junit.After;
 import org.junit.Before;
@@ -18,11 +19,6 @@ public class IntegrationTest {
     @After 
     public void tearDownClass() {
 
-    }
-
-    @Test 
-    public void testTest() {
-        System.out.println("IntegrationTest working");
     }
 
     @Test
@@ -159,5 +155,25 @@ public class IntegrationTest {
 
         System.out.println("    ✅ All tests passed");
 
+    }
+
+    @Test
+    public void testValidInputHandling() {
+
+    }
+
+    @Test
+    public void testInvalidInputHandling() {
+
+    }
+
+    @Test
+    public void testOutputFileGeneration() {
+
+    }
+
+    @Test
+    public void testOutputFileContents() {
+        
     }
 }
