@@ -1,0 +1,64 @@
+player1 initial hand 10000 39 2 15
+player1 discards a 15 to deck 4
+player1 draws a 50 from deck 4
+player1 current hand is 10000 39 2 50
+player1 discards a 10000 to deck 4
+player1 draws a 3 from deck 4
+player1 current hand is 39 2 50 3
+player1 discards a 3 to deck 4
+player1 draws a 93 from deck 4
+player1 current hand is 39 2 50 93
+player1 discards a 50 to deck 4
+player1 draws a 22 from deck 4
+player1 current hand is 39 2 93 22
+player1 discards a 22 to deck 4
+player1 draws a 2 from deck 4
+player1 current hand is 39 2 93 2
+player1 discards a 2 to deck 4
+player1 draws a 73 from deck 4
+player1 current hand is 39 2 93 73
+player1 discards a 73 to deck 4
+player1 draws a 3 from deck 4
+player1 current hand is 39 2 93 3
+player1 discards a 3 to deck 4
+player1 draws a 62 from deck 4
+player1 current hand is 39 2 93 62
+player1 discards a 2 to deck 4
+player1 draws a 66 from deck 4
+player1 current hand is 39 93 62 66
+player1 discards a 93 to deck 4
+player1 draws a 30 from deck 4
+player1 current hand is 39 62 66 30
+player1 discards a 66 to deck 4
+player1 draws a 43 from deck 4
+player1 current hand is 39 62 30 43
+player1 discards a 30 to deck 4
+player1 draws a 52 from deck 4
+player1 current hand is 39 62 43 52
+player1 discards a 62 to deck 4
+player1 draws a 100 from deck 4
+player1 current hand is 39 43 52 100
+player1 discards a 43 to deck 4
+player1 draws a 2 from deck 4
+player1 current hand is 39 52 100 2
+player1 discards a 2 to deck 4
+player1 draws a 60 from deck 4
+player1 current hand is 39 52 100 60
+player1 discards a 52 to deck 4
+player1 draws a 50 from deck 4
+player1 current hand is 39 100 60 50
+player1 discards a 100 to deck 4
+player1 draws a 18 from deck 4
+player1 current hand is 39 60 50 18
+player1 discards a 50 to deck 4
+player1 draws a 2 from deck 4
+player1 current hand is 39 60 18 2
+player1 discards a 39 to deck 4
+player1 draws a 39 from deck 4
+player1 current hand is 60 18 2 39
+player1 discards a 18 to deck 4
+player1 draws a 95 from deck 4
+player1 current hand is 60 2 39 95
+player2 has informed player1 that player2 has won
+player1 exits
+player1 final hand 60 2 39 95

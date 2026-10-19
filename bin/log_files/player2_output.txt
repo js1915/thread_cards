@@ -1,0 +1,61 @@
+player2 initial hand 10 54 66 39
+player2 discards a 39 to deck 4
+player2 draws a 95 from deck 4
+player2 current hand is 10 54 66 95
+player2 discards a 66 to deck 4
+player2 draws a 5 from deck 4
+player2 current hand is 10 54 95 5
+player2 discards a 5 to deck 4
+player2 draws a 42 from deck 4
+player2 current hand is 10 54 95 42
+player2 discards a 95 to deck 4
+player2 draws a 2 from deck 4
+player2 current hand is 10 54 42 2
+player2 discards a 10 to deck 4
+player2 draws a 15 from deck 4
+player2 current hand is 54 42 2 15
+player2 discards a 15 to deck 4
+player2 draws a 10000 from deck 4
+player2 current hand is 54 42 2 10000
+player2 discards a 10000 to deck 4
+player2 draws a 3 from deck 4
+player2 current hand is 54 42 2 3
+player2 discards a 54 to deck 4
+player2 draws a 50 from deck 4
+player2 current hand is 42 2 3 50
+player2 discards a 3 to deck 4
+player2 draws a 22 from deck 4
+player2 current hand is 42 2 50 22
+player2 discards a 42 to deck 4
+player2 draws a 2 from deck 4
+player2 current hand is 2 50 22 2
+player2 discards a 22 to deck 4
+player2 draws a 73 from deck 4
+player2 current hand is 2 50 2 73
+player2 discards a 50 to deck 4
+player2 draws a 3 from deck 4
+player2 current hand is 2 2 73 3
+player2 discards a 73 to deck 4
+player2 draws a 2 from deck 4
+player2 current hand is 2 2 3 2
+player2 discards a 3 to deck 4
+player2 draws a 93 from deck 4
+player2 current hand is 2 2 2 93
+player2 discards a 93 to deck 4
+player2 draws a 66 from deck 4
+player2 current hand is 2 2 2 66
+player2 discards a 66 to deck 4
+player2 draws a 30 from deck 4
+player2 current hand is 2 2 2 30
+player2 discards a 30 to deck 4
+player2 draws a 62 from deck 4
+player2 current hand is 2 2 2 62
+player2 discards a 62 to deck 4
+player2 draws a 43 from deck 4
+player2 current hand is 2 2 2 43
+player2 discards a 43 to deck 4
+player2 draws a 2 from deck 4
+player2 current hand is 2 2 2 2
+player2 wins
+player2 exits
+player2 final hand 2 2 2 2

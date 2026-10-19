@@ -1,0 +1,67 @@
+player3 initial hand 43 30 26 18
+player3 discards a 30 to deck 4
+player3 draws a 3 from deck 4
+player3 current hand is 43 26 18 3
+player3 discards a 43 to deck 4
+player3 draws a 2 from deck 4
+player3 current hand is 26 18 3 2
+player3 discards a 26 to deck 4
+player3 draws a 2 from deck 4
+player3 current hand is 18 3 2 2
+player3 discards a 2 to deck 4
+player3 draws a 50 from deck 4
+player3 current hand is 18 3 2 50
+player3 discards a 18 to deck 4
+player3 draws a 39 from deck 4
+player3 current hand is 3 2 50 39
+player3 discards a 50 to deck 4
+player3 draws a 66 from deck 4
+player3 current hand is 3 2 39 66
+player3 discards a 39 to deck 4
+player3 draws a 5 from deck 4
+player3 current hand is 3 2 66 5
+player3 discards a 5 to deck 4
+player3 draws a 95 from deck 4
+player3 current hand is 3 2 66 95
+player3 discards a 2 to deck 4
+player3 draws a 10 from deck 4
+player3 current hand is 3 66 95 10
+player3 discards a 95 to deck 4
+player3 draws a 15 from deck 4
+player3 current hand is 3 66 10 15
+player3 discards a 10 to deck 4
+player3 draws a 10000 from deck 4
+player3 current hand is 3 66 15 10000
+player3 discards a 66 to deck 4
+player3 draws a 54 from deck 4
+player3 current hand is 3 15 10000 54
+player3 discards a 54 to deck 4
+player3 draws a 3 from deck 4
+player3 current hand is 3 15 10000 3
+player3 discards a 10000 to deck 4
+player3 draws a 42 from deck 4
+player3 current hand is 3 15 3 42
+player3 discards a 15 to deck 4
+player3 draws a 22 from deck 4
+player3 current hand is 3 3 42 22
+player3 discards a 22 to deck 4
+player3 draws a 50 from deck 4
+player3 current hand is 3 3 42 50
+player3 discards a 42 to deck 4
+player3 draws a 73 from deck 4
+player3 current hand is 3 3 50 73
+player3 discards a 50 to deck 4
+player3 draws a 3 from deck 4
+player3 current hand is 3 3 73 3
+player3 discards a 73 to deck 4
+player3 draws a 93 from deck 4
+player3 current hand is 3 3 3 93
+player3 discards a 93 to deck 4
+player3 draws a 66 from deck 4
+player3 current hand is 3 3 3 66
+player3 discards a 66 to deck 4
+player3 draws a 30 from deck 4
+player3 current hand is 3 3 3 30
+player2 has informed player3 that player2 has won
+player3 exits
+player3 final hand 3 3 3 30
