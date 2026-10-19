@@ -9,7 +9,7 @@ public class Deck {
     private static int deckCount = 0;
 
     private ArrayList<Card> deck;
-    private static int deckNumber;
+    private int deckNumber;
 
     private File logFile;
 
@@ -53,7 +53,7 @@ public class Deck {
     }
 
     public static void resetDeck() {
-        deckNumber = 0;
+        deckCount = 0;
     }
 
     private void setupFile() {
@@ -88,5 +88,6 @@ public class Deck {
     public void endGame() {
         String m = this.getDeckName() + " contents: " + this.getDeckAsString();
         this.logMessage(m);
+        System.out.println("Messaged logged");
     }
 }
