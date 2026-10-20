@@ -1,0 +1,28 @@
+# thread_cards
+Threading my cards since 2026
+
+## Running the cards.jar file
+1. Download the cards.jar file
+2. Ensure that your Java installation has read/write permissions for the directory that cards.jar is in 
+3. Run the command 'java -jar cards.jar'
+4. Enter the number of players in the game
+5. Enter the complete file path to the pack file (n.b. partial/relative file paths may/may not work depending on your environment and OS)
+6. The game will run and produce the required output files (n.b it will run indefinitely if there is no winning hand in the pack, so may need to be interrupted)
+
+## Viewing the contents of the cards.jar file
+1. Download the cards.jar file
+2. Run the command 'jar xf cards.jar'
+3. The cards.jar file will be extracted to all the bytecode (.class) files and source code (.java) files.
+
+## Compilation and running of tests
+1. Ensure you have a working version of JUnit 4.13.2 and Hamcrest 1.3. These are packeged in the cardsTest.zip folder in the correct location. Alternatively, you can install these yourself as follows:
+    1. Download JUnit4.13.2.jar and hamcrest-core-1.3.jar
+    2. Put these files in a folder named 'lib' which is in the same directory as src/ and bin/
+3. Download source code
+4. Run 'compile_tests.bat' or command "javac -cp lib/junit-4.13.2.jar;lib/hamcrest-core-1.3.jar;src/thread_cards -d bin src/thread_cards/*.java"
+5. Run the tests via 'run_tests.bat' or command "java -cp lib/hamcrest-core-1.3.jar;lib/junit-4.13.2.jar;src/thread_cards/;bin/src/thread_cards RunTestSuite"
+
+## Dependencies
+- JUnit4.13.2
+- HamcrestCore 1.3
+- Java 25.0.1+

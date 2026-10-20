@@ -11,15 +11,21 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class IntegrationTest {
+    
     File f;
     String fPath;
+
     @Before 
     public void setUpClass() {
         fPath = new File("").getAbsolutePath();
         f = new File(fPath.concat("/test_output.txt"));
         Player.resetPlayers();
         Deck.resetDeck();
+    }
 
+    @After 
+    public void tearDownClass() {
+        f.delete();
     }
 
     @Test
@@ -100,7 +106,6 @@ public class IntegrationTest {
     @Test
     public void testWinDetection() {
         System.out.println("testWinDetection:");
-        File f = new File("_.txt");
         ArrayList<Card> cards = new ArrayList<>();
         
         for (int i=0; i<16; i++) {
