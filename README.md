@@ -1,5 +1,4 @@
 # thread_cards
-Threading my cards since 2026
 
 ## Running the cards.jar file
 1. Download the cards.jar file
