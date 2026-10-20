@@ -22,6 +22,8 @@ public class PlayerTest {
 
     @Before
     public void setUpClass() throws Exception {
+        Player.resetPlayers();
+        Deck.resetDeck();
         f1 = new File("deck1Output.txt");
         f2 = new File("deck2Output.txt");
 
@@ -34,8 +36,6 @@ public class PlayerTest {
 
     @After
     public void tearDownClass() {
-        Player.resetPlayers();
-        Deck.resetDeck();
         f1.delete();
         f2.delete();
         f3.delete();
