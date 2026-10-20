@@ -88,6 +88,5 @@ public class Deck {
     public void endGame() {
         String m = this.getDeckName() + " contents: " + this.getDeckAsString();
         this.logMessage(m);
-        System.out.println("Messaged logged");
     }
 }

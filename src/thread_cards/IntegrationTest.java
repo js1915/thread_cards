@@ -16,7 +16,6 @@ public class IntegrationTest {
     @Before 
     public void setUpClass() {
         fPath = new File("").getAbsolutePath();
-        System.out.println(fPath);
         f = new File(fPath.concat("/test_output.txt"));
         Player.resetPlayers();
         Deck.resetDeck();
@@ -178,7 +177,6 @@ public class IntegrationTest {
 
         File p1Output = new File(fPath.concat("/player1_output.txt"));
         File p2Output = new File(fPath.concat("/player2_output.txt"));
-        System.out.println(fPath.concat("/player1_output.txt"));
 
         ArrayList<Card> cards = new ArrayList<>();
         
@@ -192,8 +190,6 @@ public class IntegrationTest {
         }
         Deck d1 = new Deck(d1Output);
         Deck d2 = new Deck(d2Output);
-        System.out.println(d1.getDeckName());
-        System.out.println(d2.getDeckName());
 
         Player p1 = new Player(d1, d2, p1Output);
         Player p2 = new Player(d2, d1, p2Output);

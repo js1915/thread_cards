@@ -107,9 +107,7 @@ public class Player implements Runnable {
 
     public void turns() {
         // Log initial hand
-        System.out.println("a");
         this.logMessage(this.getPlayerName() + " initial hand " + this.getHandAsString());
-        System.out.println("b");
 
         while (playerWon==-1) {
             if (this.isWinningHand()) {
