@@ -30,6 +30,7 @@ public class Player implements Runnable {
 
     public static void resetPlayers() {
         playerCount = 0;
+        playerWon = -1;
     }
     public static void resetPlayers(int count) {
         playerCount = count;
@@ -106,7 +107,9 @@ public class Player implements Runnable {
 
     public void turns() {
         // Log initial hand
+        System.out.println("a");
         this.logMessage(this.getPlayerName() + " initial hand " + this.getHandAsString());
+        System.out.println("b");
 
         while (playerWon==-1) {
             if (this.isWinningHand()) {

@@ -18,11 +18,9 @@ public class IntegrationTest {
         fPath = new File("").getAbsolutePath();
         System.out.println(fPath);
         f = new File(fPath.concat("/test_output.txt"));
-    }
+        Player.resetPlayers();
+        Deck.resetDeck();
 
-    @After 
-    public void tearDownClass() {
-        
     }
 
     @Test
@@ -194,6 +192,8 @@ public class IntegrationTest {
         }
         Deck d1 = new Deck(d1Output);
         Deck d2 = new Deck(d2Output);
+        System.out.println(d1.getDeckName());
+        System.out.println(d2.getDeckName());
 
         Player p1 = new Player(d1, d2, p1Output);
         Player p2 = new Player(d2, d1, p2Output);
@@ -204,7 +204,7 @@ public class IntegrationTest {
             d1.addCard(cards.get(i+8));
             d2.addCard(cards.get(i+12));
         }
-
+        System.out.println("starting turns");
         p1.turns();
         Scanner p1reader = new Scanner(p1Output);
         String initialHandLine = p1reader.nextLine();
