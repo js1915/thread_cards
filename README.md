@@ -17,7 +17,7 @@
 1. Download JUnit4.13.2
 2. Download source code
 3. Run 'compile_tests.bat' or command "javac -cp lib/junit-4.13.2.jar;lib/hamcrest-core-1.3.jar;bin;src/thread_cards -d bin src/thread_cards/*.java"
-4. Run the tests via 'run_tests.bat' or command "java -cp lib/hamcrest-core-1.3.jar:lib/junit-4.13.2.jar:src/thread_cards/:bin/src/thread_cards RunTestSuite"
+4. Run the tests via 'run_tests.bat' or command "java -cp lib/hamcrest-core-1.3.jar;lib/junit-4.13.2.jar;src/thread_cards/;bin RunTestSuite"
 
 ## Dependencies
 - JUnit4.13.2
